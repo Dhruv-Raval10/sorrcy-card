@@ -1,0 +1,670 @@
+/* ==========================================================================
+   ROMANTIC MOBILE LANDING PAGE - STYLESHEET
+   Optimized for Samsung Galaxy S22+ (Viewport: 384 x 832 CSS px, 19.5:9)
+   Palette: Blush-pink gradient, Coral-pink accent, Charcoal text
+   ========================================================================== */
+
+/* --- CSS Custom Properties / Variables --- */
+:root {
+  /* Color Palette */
+  --bg-gradient-start: #FDEDEE;
+  --bg-gradient-end: #FCE4E6;
+  --coral-accent: #F0606F;
+  --coral-accent-hover: #E44F5F;
+  --coral-light: #FF8596;
+  --coral-glow: rgba(240, 96, 111, 0.38);
+  --coral-glow-hover: rgba(240, 96, 111, 0.55);
+  --text-charcoal: #2B2B2B;
+  --text-muted: #6B6064;
+  --card-bg: rgba(255, 255, 255, 0.88);
+  --card-border: rgba(255, 255, 255, 0.95);
+  --card-shadow: 0 14px 34px -8px rgba(240, 96, 111, 0.18), 0 6px 16px -4px rgba(43, 43, 43, 0.05);
+
+  /* Typography */
+  --font-handwritten: 'Patrick Hand', 'Caveat', cursive, -apple-system, sans-serif;
+  --font-body: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Dimensions & Spacing */
+  --touch-target-min: 52px;
+  --border-radius-pill: 9999px;
+  --border-radius-card: 26px;
+  --max-content-width: 384px;
+
+  /* Easing curves */
+  --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --ease-smooth: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* --- Global Reset & Box Sizing --- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  font-size: 16px;
+  background-color: var(--bg-gradient-start);
+  height: 100%;
+  overflow: hidden;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  height: 100vh;
+  height: 100dvh;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  position: fixed;
+  inset: 0;
+  font-family: var(--font-body);
+  color: var(--text-charcoal);
+  background: linear-gradient(175deg, var(--bg-gradient-start) 0%, #FEE8EC 45%, var(--bg-gradient-end) 100%);
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* --- Font Utility Classes --- */
+.font-handwritten {
+  font-family: var(--font-handwritten);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+/* --- Ambient Floating Background Hearts Layer --- */
+.bg-hearts-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.ambient-heart {
+  position: absolute;
+  bottom: -40px;
+  color: var(--coral-accent);
+  opacity: 0.16;
+  will-change: transform, opacity;
+  animation: floatUpAmbient 14s linear infinite;
+}
+
+@keyframes floatUpAmbient {
+  0% {
+    transform: translateY(0) rotate(0deg) scale(0.85);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.22;
+  }
+  85% {
+    opacity: 0.2;
+  }
+  100% {
+    transform: translateY(-880px) rotate(35deg) scale(1.15);
+    opacity: 0;
+  }
+}
+
+/* --- Main Application Container --- */
+.app-container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: var(--max-content-width);
+  height: 100vh;
+  height: 100dvh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* --- Screen Base Styles --- */
+.screen {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(22px) scale(0.97);
+  transition: opacity 0.42s var(--ease-smooth),
+              transform 0.42s var(--ease-spring),
+              visibility 0.42s;
+  will-change: opacity, transform;
+}
+
+.screen[hidden] {
+  display: none;
+}
+
+.screen--active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+}
+
+.screen--leaving {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(-18px) scale(0.96);
+  transition: opacity 0.35s ease-in, transform 0.35s ease-in;
+}
+
+/* Screen Internal Layout Structure */
+.screen-layout {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+  padding-left: clamp(20px, 6vw, 28px);
+  padding-right: clamp(20px, 6vw, 28px);
+  padding-top: max(24px, env(safe-area-inset-top, 24px));
+  padding-bottom: max(20px, env(safe-area-inset-bottom, 20px));
+}
+
+.screen-header {
+  flex-shrink: 0;
+  text-align: center;
+  padding-top: 4px;
+}
+
+.screen-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 0; /* Prevents overflow flex container stretch */
+}
+
+.screen-footer {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 6px;
+  min-height: 48px;
+}
+
+/* ==========================================================================
+   SCREEN 1: THE QUESTION
+   ========================================================================== */
+.greeting-note {
+  font-size: 1.65rem;
+  line-height: 1.3;
+  color: var(--coral-accent);
+  text-shadow: 0 2px 8px rgba(240, 96, 111, 0.15);
+  animation: fadeInDown 0.8s var(--ease-spring) both;
+}
+
+/* Landing Page Couple Illustration */
+.landing-illustration {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 250px;
+  margin-top: 2px;
+  margin-bottom: 12px;
+  position: relative;
+}
+
+.landing-couple-img {
+  max-height: 250px;
+  width: auto;
+  max-width: 82%;
+  object-fit: contain;
+  filter: drop-shadow(0 12px 24px rgba(240, 96, 111, 0.22));
+  animation: softFloat 4.2s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes softFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.question-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.question-heading {
+  font-size: 2.05rem;
+  line-height: 1.2;
+  color: var(--text-charcoal);
+  letter-spacing: -0.01em;
+  padding: 0 4px;
+}
+
+.heart-emoji-inline {
+  display: inline-block;
+  margin-left: 4px;
+  font-size: 1.75rem;
+  vertical-align: middle;
+  animation: gentleWiggle 3.2s ease-in-out infinite;
+}
+
+/* Buttons Stack */
+.button-stack {
+  width: 100%;
+  max-width: 328px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Action Button Common Styles */
+.action-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 56px; /* Exceeds 52px requirement */
+  padding: 14px 24px;
+  border-radius: var(--border-radius-pill);
+  font-family: var(--font-body);
+  font-size: 1.06rem;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  transition: transform 0.18s var(--ease-spring),
+              box-shadow 0.22s ease,
+              background-color 0.2s ease;
+  will-change: transform, box-shadow;
+}
+
+.action-btn:focus-visible {
+  outline: 3px solid var(--coral-accent);
+  outline-offset: 3px;
+}
+
+/* Button 1: "Yes, I am cute" */
+.btn-yes {
+  background-color: var(--coral-accent);
+  color: #FFFFFF;
+  box-shadow: 0 10px 24px -3px var(--coral-glow);
+  animation: pulseGlow 3s ease-in-out infinite;
+}
+
+.btn-yes:hover {
+  background-color: var(--coral-accent-hover);
+  box-shadow: 0 12px 28px -2px var(--coral-glow-hover);
+}
+
+.btn-yes:active,
+.btn-yes.btn--pressed {
+  transform: scale(0.95);
+  box-shadow: 0 5px 12px -2px var(--coral-glow);
+}
+
+/* Button 2: "No, I am not cute" */
+.btn-no {
+  background-color: #FFFFFF;
+  color: var(--coral-accent);
+  border: 2px solid var(--coral-accent);
+  box-shadow: 0 6px 18px -4px rgba(240, 96, 111, 0.14);
+}
+
+.btn-no:hover {
+  background-color: #FFF9FA;
+  box-shadow: 0 8px 22px -3px rgba(240, 96, 111, 0.22);
+}
+
+.btn-no:active,
+.btn-no.btn--pressed {
+  transform: scale(0.95);
+  background-color: #FFF0F2;
+}
+
+/* ==========================================================================
+   SCREENS 2A & 2B: CELEBRATION & LOVE NOTE
+   ========================================================================== */
+.result-heading {
+  font-size: 2.45rem;
+  line-height: 1.2;
+  color: var(--coral-accent);
+  text-shadow: 0 2px 10px rgba(240, 96, 111, 0.16);
+  margin-top: 4px;
+}
+
+/* Screen 2A Layout Tuning */
+.screen-body--celebrate {
+  gap: 16px;
+}
+
+.illustration-card {
+  width: 100%;
+  max-width: 310px;
+  height: 240px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.couple-art-img {
+  max-height: 240px;
+  width: auto;
+  max-width: 85%;
+  object-fit: contain;
+  filter: drop-shadow(0 12px 24px rgba(240, 96, 111, 0.22));
+}
+
+.couple-svg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  overflow: visible;
+}
+
+/* Compact version for Screen 2B to fit message card cleanly */
+.illustration-card--compact {
+  max-width: 250px;
+  height: 180px;
+  margin-bottom: -2px;
+}
+
+.couple-art-img--compact {
+  max-height: 180px;
+}
+
+/* Sweet Note Card in Screen 2A */
+.sweet-note-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1.5px solid var(--card-border);
+  border-radius: 20px;
+  padding: 14px 22px;
+  max-width: 320px;
+  text-align: center;
+  box-shadow: var(--card-shadow);
+  animation: fadeInUp 0.55s var(--ease-spring) both 0.15s;
+}
+
+.sweet-note-text {
+  font-size: 0.96rem;
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--coral-accent);
+}
+
+/* Screen 2B: White-Pink Rounded Message Card */
+.screen-body--love-card {
+  gap: 14px;
+}
+
+.love-message-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1.5px solid var(--card-border);
+  border-radius: var(--border-radius-card);
+  padding: 20px 22px;
+  width: 100%;
+  max-width: 328px;
+  text-align: center;
+  box-shadow: var(--card-shadow);
+  position: relative;
+  animation: cardEntrance 0.55s var(--ease-spring) both 0.12s;
+}
+
+.love-message-card::before {
+  content: "“";
+  position: absolute;
+  top: 6px;
+  left: 16px;
+  font-family: var(--font-handwritten);
+  font-size: 2.8rem;
+  line-height: 1;
+  color: var(--coral-accent);
+  opacity: 0.25;
+}
+
+.love-message-text {
+  font-size: 0.98rem;
+  font-weight: 500;
+  line-height: 1.55;
+  color: var(--text-charcoal);
+  letter-spacing: 0.01em;
+}
+
+/* Back Button */
+.btn-back {
+  background: transparent;
+  border: none;
+  color: var(--coral-accent);
+  font-family: var(--font-body);
+  font-size: 0.96rem;
+  font-weight: 600;
+  padding: 10px 18px;
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  border-radius: var(--border-radius-pill);
+  transition: transform 0.16s var(--ease-spring),
+              background-color 0.2s ease,
+              color 0.2s ease;
+}
+
+.back-icon {
+  font-size: 1.15rem;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+
+.btn-back:hover {
+  background-color: rgba(240, 96, 111, 0.08);
+}
+
+.btn-back:hover .back-icon {
+  transform: translateX(-3px);
+}
+
+.btn-back:active {
+  transform: scale(0.94);
+  background-color: rgba(240, 96, 111, 0.14);
+}
+
+.btn-back:focus-visible {
+  outline: 2px solid var(--coral-accent);
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   CONFETTI OF HEARTS & RISING HEARTS ON SCREEN 2
+   ========================================================================== */
+.confetti-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 999;
+}
+
+.heart-burst-particle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 24px;
+  height: 24px;
+  pointer-events: none;
+  will-change: transform, opacity;
+  animation: burstAnimation 1.8s cubic-bezier(0.12, 0.78, 0.32, 1) forwards;
+}
+
+@keyframes burstAnimation {
+  0% {
+    transform: translate(-50%, -50%) translate(0, 0) scale(0) rotate(0deg);
+    opacity: 1;
+  }
+  30% {
+    opacity: 1;
+    transform: translate(-50%, -50%)
+               translate(calc(var(--target-x) * 0.75), calc(var(--target-y) * 0.75))
+               scale(var(--scale, 1.2))
+               rotate(calc(var(--rot, 0deg) * 0.5));
+  }
+  75% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate(-50%, -50%)
+               translate(var(--target-x), calc(var(--target-y) + 70px))
+               scale(calc(var(--scale, 1) * 0.8))
+               rotate(var(--rot, 0deg));
+    opacity: 0;
+  }
+}
+
+/* Rising Hearts on Screen 2 (continuous celebration stream) */
+.rising-heart {
+  position: absolute;
+  bottom: -30px;
+  pointer-events: none;
+  animation: riseUp 5s linear forwards;
+  will-change: transform, opacity;
+}
+
+@keyframes riseUp {
+  0% {
+    transform: translateY(0) scale(0.6) rotate(0deg);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.75;
+  }
+  85% {
+    opacity: 0.65;
+  }
+  100% {
+    transform: translateY(-840px) scale(1.1) rotate(25deg);
+    opacity: 0;
+  }
+}
+
+/* ==========================================================================
+   ANIMATIONS & KEYFRAMES
+   ========================================================================== */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes cardEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(18px) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes softPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 10px 26px -4px rgba(240, 96, 111, 0.24);
+  }
+  50% {
+    transform: scale(1.06);
+    box-shadow: 0 14px 30px -2px rgba(240, 96, 111, 0.38);
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 10px 24px -3px var(--coral-glow);
+  }
+  50% {
+    transform: scale(1.02);
+    box-shadow: 0 14px 28px -1px var(--coral-glow-hover);
+  }
+}
+
+@keyframes gentleWiggle {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-10deg) scale(1.08);
+  }
+  75% {
+    transform: rotate(8deg) scale(1.05);
+  }
+}
+
+/* ==========================================================================
+   ACCESSIBILITY & PREFERS-REDUCED-MOTION
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+
+  .ambient-heart,
+  .heart-burst-particle,
+  .rising-heart {
+    display: none !important;
+  }
+
+  .screen {
+    transform: none !important;
+  }
+
+  .btn-yes {
+    animation: none !important;
+  }
+
+  .heart-badge,
+  .heart-emoji-inline,
+  .landing-couple-img {
+    animation: none !important;
+  }
+}

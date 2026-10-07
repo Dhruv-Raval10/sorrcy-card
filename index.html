@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#FDEDEE">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <title>Do You Know You're Cute? 💖</title>
+
+  <!-- Google Fonts: Caveat & Patrick Hand for handwritten headings, Poppins for body -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Patrick+Hand&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Ambient background floating hearts -->
+  <div class="bg-hearts-layer" aria-hidden="true" id="bg-hearts"></div>
+
+  <!-- Reusable Inline SVG Symbols -->
+  <svg style="display: none;" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="icon-heart" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+    </symbol>
+
+    <!-- Couple Hugging & Kissing Cartoon Illustration -->
+    <symbol id="couple-kiss-art" viewBox="0 0 320 260">
+      <defs>
+        <!-- Soft backdrop radial glow -->
+        <radialGradient id="couple-glow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#FFE8EC" stop-opacity="0.9"/>
+          <stop offset="70%" stop-color="#FFF0F3" stop-opacity="0.5"/>
+          <stop offset="100%" stop-color="#FFF5F7" stop-opacity="0"/>
+        </radialGradient>
+        <!-- Sweater knit gradient -->
+        <linearGradient id="sweater-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#FFA8BA"/>
+          <stop offset="100%" stop-color="#F28CA2"/>
+        </linearGradient>
+        <!-- Hair gradient man -->
+        <linearGradient id="man-hair-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#40281C"/>
+          <stop offset="100%" stop-color="#281710"/>
+        </linearGradient>
+        <!-- Hair gradient woman -->
+        <linearGradient id="woman-hair-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#6A3B22"/>
+          <stop offset="60%" stop-color="#512B16"/>
+          <stop offset="100%" stop-color="#3D1E0E"/>
+        </linearGradient>
+        <!-- Hoodie gradient -->
+        <linearGradient id="hoodie-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#2A2A30"/>
+          <stop offset="100%" stop-color="#1A1A1F"/>
+        </linearGradient>
+      </defs>
+
+      <!-- Romantic Glow Circle -->
+      <circle cx="160" cy="130" r="118" fill="url(#couple-glow)" />
+
+      <!-- Floating Little Magic Hearts & Sparkles around couple -->
+      <g class="couple-floating-elements">
+        <!-- Heart Top Center -->
+        <path d="M160 38 c-2.5-5 -8-5 -10.5 0 c-3.5 7 10.5 14 10.5 14 s14-7 10.5-14 c-2.5-5 -8-5 -10.5 0 z" fill="#F0606F" opacity="0.9"/>
+        <!-- Heart Top Right -->
+        <path d="M236 62 c-2-3.8 -6.2-3.8 -8.2 0 c-2.8 5.5 8.2 11 8.2 11 s11-5.5 8.2-11 c-2-3.8 -6.2-3.8 -8.2 0 z" fill="#FF96AB" opacity="0.85"/>
+        <!-- Heart Top Left -->
+        <path d="M82 78 c-1.6-3 -5-3 -6.6 0 c-2.2 4.4 6.6 8.8 6.6 8.8 s8.8-4.4 6.6-8.8 c-1.6-3 -5-3 -6.6 0 z" fill="#FFAEC0" opacity="0.75"/>
+        <!-- Heart Right Far -->
+        <path d="M255 125 c-1.4-2.6 -4.4-2.6 -5.8 0 c-2 3.8 5.8 7.6 5.8 7.6 s7.6-3.8 5.8-7.6 c-1.4-2.6 -4.4-2.6 -5.8 0 z" fill="#F0606F" opacity="0.65"/>
+        <!-- Sparkle 1 -->
+        <path d="M106 58 q2 8 8 10 q-6 2 -8 10 q-2 -8 -8 -10 q6 -2 8 -10" fill="#FFC2D1"/>
+        <!-- Sparkle 2 -->
+        <path d="M218 42 q1.5 6 6 7.5 q-4.5 1.5 -6 7.5 q-1.5 -6 -6 -7.5 q4.5 -1.5 6 -7.5" fill="#FFD700" opacity="0.9"/>
+      </g>
+
+      <!-- === WOMAN: BACK HAIR LAYER === -->
+      <path d="M175 115 C175 90 205 85 220 95 C238 107 245 130 242 165 C240 195 248 215 250 250 C242 254 220 255 210 240 C205 220 215 190 205 165 Z" fill="url(#woman-hair-grad)"/>
+
+      <!-- === MAN: HOODIE BODY & ARMS === -->
+      <!-- Back Arm / Shoulder wrapping around her -->
+      <path d="M125 185 C145 180 180 182 205 195 C215 200 225 212 222 225 C218 232 208 230 198 222 C185 212 165 208 140 210 Z" fill="#1C1C22"/>
+      <!-- Main Hoodie Torso & Left Arm -->
+      <path d="M52 260 L62 205 C68 185 85 178 112 176 C135 175 152 184 158 200 L168 260 Z" fill="url(#hoodie-grad)"/>
+      <!-- Hoodie Hood Folds in back of neck -->
+      <path d="M96 155 C90 168 95 185 112 188 C128 190 142 182 145 170 C132 168 115 162 96 155 Z" fill="#151518"/>
+      <!-- Hoodie Cords -->
+      <path d="M116 186 C116 200 114 216 113 228" stroke="#E2E2EA" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+      <circle cx="113" cy="229" r="2.2" fill="#E2E2EA"/>
+      <path d="M128 186 C129 198 132 212 133 224" stroke="#E2E2EA" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+      <circle cx="133" cy="225" r="2.2" fill="#E2E2EA"/>
+
+      <!-- === WOMAN: PINK KNIT SWEATER === -->
+      <!-- Sweater Body -->
+      <path d="M162 260 C158 230 162 205 175 195 C190 185 215 190 230 205 C240 215 245 235 248 260 Z" fill="url(#sweater-grad)"/>
+      <!-- Knit Texture Lines (subtle decorative ribs) -->
+      <path d="M185 206 L185 260 M198 205 L198 260 M212 208 L212 260 M225 215 L225 260" stroke="#F8829B" stroke-width="1.2" stroke-opacity="0.4" stroke-dasharray="2 3"/>
+      <!-- Sweater Fold / Cowl Neck Collar -->
+      <path d="M168 192 C168 182 185 178 200 180 C212 182 222 188 220 198 C210 205 180 204 168 192 Z" fill="#EE7F96"/>
+      <!-- Woman's Hand resting gently on Man's chest -->
+      <g class="woman-hand">
+        <!-- Sleeve cuff -->
+        <path d="M166 226 C163 222 155 220 150 223 C146 225 145 231 150 235 C156 238 165 234 166 226 Z" fill="#EE7F96"/>
+        <!-- Hand / cute fingers on his black hoodie -->
+        <path d="M150 222 C145 220 138 221 133 224 C130 226 132 230 136 230 C140 230 144 231 148 233 Z" fill="#FCE2D4"/>
+      </g>
+
+      <!-- === MAN: HEAD & FACE (Kissing forehead) === -->
+      <g class="man-head">
+        <!-- Neck -->
+        <path d="M102 148 C102 165 110 176 126 176 C136 176 142 168 142 156 Z" fill="#F4C6B1"/>
+        <!-- Head base skin -->
+        <path d="M92 125 C88 100 106 82 128 80 C146 78 160 92 162 110 C163 125 158 142 146 150 C132 158 102 155 94 135 Z" fill="#FCDBC9"/>
+        <!-- Ear -->
+        <path d="M92 122 C88 120 85 125 87 132 C89 137 94 138 96 132 Z" fill="#F4C6B1"/>
+        <!-- Beard & Stubble: soft jawline, sideburn, chin -->
+        <path d="M93 118 L94 135 C95 145 102 156 118 160 C134 164 148 158 155 148 C153 145 148 146 142 144 C134 142 125 143 118 138 C110 134 105 125 104 116 Z" fill="#362217"/>
+        <!-- Mustache -->
+        <path d="M136 136 C140 134 148 133 154 138 C150 141 142 142 136 136 Z" fill="#362217"/>
+        <!-- Closed Eye (happy kiss arc) -->
+        <path d="M125 115 Q133 121 141 116" stroke="#2B1910" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+        <!-- Eyebrow -->
+        <path d="M122 106 Q132 101 142 106" stroke="#2B1910" stroke-width="2.8" stroke-linecap="round" fill="none"/>
+        <!-- Kissing Lips touching woman's forehead -->
+        <path d="M152 135 C156 133 162 133 164 136 C162 139 156 140 152 137 Z" fill="#E0737C"/>
+        <!-- Cute Blushing Cheek -->
+        <ellipse cx="122" cy="126" rx="8" ry="4.5" fill="#FF96A8" opacity="0.6"/>
+
+        <!-- Messy Dark-Brown Hair -->
+        <path d="M86 116 C82 92 100 70 126 66 C145 63 165 72 168 90 C170 98 166 106 160 108 C158 102 156 94 148 92 C140 90 138 98 128 94 C120 90 122 84 112 85 C102 86 98 96 94 104 C92 108 90 114 86 116 Z" fill="url(#man-hair-grad)"/>
+        <!-- Messy Hair Tufts/Strands on top -->
+        <path d="M108 72 C104 64 114 62 118 68" stroke="#40281C" stroke-width="3" stroke-linecap="round" fill="none"/>
+        <path d="M132 66 C136 58 146 62 144 70" stroke="#40281C" stroke-width="3" stroke-linecap="round" fill="none"/>
+        <path d="M152 74 C158 68 166 74 162 82" stroke="#40281C" stroke-width="3" stroke-linecap="round" fill="none"/>
+        <path d="M96 86 C88 80 92 74 98 78" stroke="#40281C" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+      </g>
+
+      <!-- === WOMAN: HEAD, FACE & FRONT WAVY HAIR === -->
+      <g class="woman-head">
+        <!-- Neck -->
+        <path d="M182 170 C182 182 188 190 200 190 C206 190 210 185 210 175 Z" fill="#F5CDB8"/>
+        <!-- Face profile / contour -->
+        <path d="M162 135 C162 125 172 115 186 115 C202 115 215 128 215 146 C215 162 205 178 190 178 C176 178 164 164 162 148 Z" fill="#FEEDDF"/>
+        <!-- Forehead point receiving kiss -->
+        <circle cx="163" cy="135" r="2.5" fill="#FFE2D4" opacity="0.5"/>
+        <!-- Tiny sweet kiss heart right at forehead contact point -->
+        <path d="M161 124 c-1-2 -3.5-2 -4.5 0 c-1.5 3 4.5 6 4.5 6 s6-3 4.5-6 c-1-2 -3.5-2 -4.5 0 z" fill="#F0606F"/>
+
+        <!-- Closed Smiling Eye (Joyful curved eyelash arc) -->
+        <path d="M178 143 Q186 137 194 144" stroke="#4A2511" stroke-width="2.6" stroke-linecap="round" fill="none"/>
+        <path d="M192 142 L196 140" stroke="#4A2511" stroke-width="2" stroke-linecap="round"/>
+        <path d="M194 145 L198 145" stroke="#4A2511" stroke-width="2" stroke-linecap="round"/>
+        <!-- Eyebrow -->
+        <path d="M176 134 Q185 128 194 133" stroke="#663A1E" stroke-width="2.4" stroke-linecap="round" fill="none"/>
+        <!-- Cute Nose -->
+        <path d="M172 144 Q174 148 171 150" stroke="#E59F89" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+        <!-- Sweet Happy Smile -->
+        <path d="M176 158 Q184 166 193 160" stroke="#D84F67" stroke-width="2.6" stroke-linecap="round" fill="none"/>
+        <!-- Rosy Blushing Cheek -->
+        <ellipse cx="188" cy="151" rx="9" ry="5.5" fill="#FF7D95" opacity="0.65"/>
+        <!-- Cute cheek sparkle dots -->
+        <circle cx="184" cy="150" r="1" fill="#FFFFFF" opacity="0.8"/>
+        <circle cx="191" cy="149" r="1.2" fill="#FFFFFF" opacity="0.8"/>
+        <circle cx="188" cy="153" r="1" fill="#FFFFFF" opacity="0.8"/>
+
+        <!-- Ear & Pearl Earring -->
+        <path d="M210 144 C213 142 216 146 215 152 C214 156 210 156 208 152 Z" fill="#F5CDB8"/>
+        <circle cx="212" cy="155" r="2.5" fill="#FFFFFF" stroke="#F096A8" stroke-width="0.8"/>
+
+        <!-- Wavy Brown Hair: Front & Cascading locks over shoulder -->
+        <!-- Front Bangs/Parting framing face -->
+        <path d="M165 125 C170 115 185 110 205 116 C215 120 222 130 220 140 C216 130 206 124 195 124 C182 124 172 130 168 135 Z" fill="url(#woman-hair-grad)"/>
+        <!-- Long Wavy Lock flowing over sweater shoulder -->
+        <path d="M215 145 C222 165 228 190 222 215 C218 230 208 245 204 258 C215 258 228 245 232 230 C238 205 235 175 225 150 Z" fill="url(#woman-hair-grad)"/>
+        <path d="M205 160 C212 180 216 205 212 230 C208 245 198 255 195 260 C202 260 215 250 218 235 C224 210 220 185 212 162 Z" fill="#4A2511" opacity="0.6"/>
+        <!-- Soft Top Hair Wave volume -->
+        <path d="M172 118 C176 102 195 96 212 100 C226 104 235 116 235 130 C232 120 222 110 210 108 C195 106 182 112 172 118 Z" fill="#75452B"/>
+      </g>
+    </symbol>
+  </svg>
+
+  <!-- Main Mobile App Frame (Optimized for 384x832 CSS px) -->
+  <main class="app-container">
+
+    <!-- ==================== SCREEN 1: THE QUESTION ==================== -->
+    <section id="screen-1" class="screen screen--active" aria-label="Question Screen">
+      <div class="screen-layout">
+        <!-- Top romantic greeting -->
+        <header class="screen-header">
+          <p class="greeting-note font-handwritten">Hey My Love</p>
+        </header>
+
+        <!-- Centered Main Question Section -->
+        <div class="screen-body screen-body--center">
+          <!-- Couple PNG Illustration below "Hey My Love" and above "Do you know you're cute" -->
+          <div class="landing-illustration">
+            <img src="couple.png" alt="Couple hugging and kissing" class="landing-couple-img" />
+          </div>
+
+          <div class="question-container">
+            <h1 class="question-heading font-handwritten">
+              Do you know you're cute?
+              <span class="heart-emoji-inline">💖</span>
+            </h1>
+          </div>
+
+          <!-- Action Buttons Stack -->
+          <div class="button-stack" role="group" aria-label="Answer options">
+            <button type="button" id="btn-yes" class="action-btn btn-yes" aria-label="Yes, I am cute">
+              <span class="btn-text">Yes, I am cute</span>
+            </button>
+            <button type="button" id="btn-no" class="action-btn btn-no" aria-label="No, I am not cute">
+              <span class="btn-text">No, I am not cute</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Safe area footer spacer -->
+        <footer class="screen-footer" aria-hidden="true"></footer>
+      </div>
+    </section>
+
+    <!-- ==================== SCREEN 2A: "YES, I AM CUTE" ==================== -->
+    <section id="screen-2a" class="screen" aria-label="Celebration Screen" hidden>
+      <div class="screen-layout">
+        <header class="screen-header">
+          <h2 class="result-heading font-handwritten">Yes, absolutely! 💖</h2>
+        </header>
+
+        <div class="screen-body screen-body--celebrate">
+          <!-- Couple Hugging & Kissing Illustration -->
+          <div class="illustration-card" role="img" aria-label="Cute pastel cartoon of a bearded man in a black hoodie kissing the forehead of his smiling girlfriend in a pink knit sweater">
+            <img src="couple.png" alt="Couple hugging and kissing" class="couple-art-img" />
+          </div>
+
+          <!-- Romantic Note -->
+          <div class="sweet-note-card">
+            <p class="sweet-note-text">
+              Always the cutest, sweetest soul in my whole world ✨
+            </p>
+          </div>
+        </div>
+
+        <footer class="screen-footer">
+          <button type="button" class="btn-back" data-back-to="screen-1" aria-label="Go back to the question">
+            <span class="back-icon" aria-hidden="true">←</span> Back
+          </button>
+        </footer>
+      </div>
+    </section>
+
+    <!-- ==================== SCREEN 2B: "NO, I AM NOT CUTE" ==================== -->
+    <section id="screen-2b" class="screen" aria-label="Love Note Screen" hidden>
+      <div class="screen-layout">
+        <header class="screen-header">
+          <h2 class="result-heading font-handwritten">Yes, absolutely! 💖</h2>
+        </header>
+
+        <div class="screen-body screen-body--love-card">
+          <!-- Same Couple Illustration above the card -->
+          <div class="illustration-card illustration-card--compact" role="img" aria-label="Cute pastel cartoon of a bearded man in a black hoodie kissing the forehead of his smiling girlfriend in a pink knit sweater">
+            <img src="couple.png" alt="Couple hugging and kissing" class="couple-art-img couple-art-img--compact" />
+          </div>
+
+          <!-- White-Pink Message Card with Exact Prompt Text -->
+          <div class="love-message-card">
+            <p class="love-message-text">
+              You're not only cute, but you're also the most beautiful girl in the world for me. You mean the world to me, baby.
+            </p>
+          </div>
+        </div>
+
+        <footer class="screen-footer">
+          <button type="button" class="btn-back" data-back-to="screen-1" aria-label="Go back to the question">
+            <span class="back-icon" aria-hidden="true">←</span> Back
+          </button>
+        </footer>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Confetti Layer for Heart Bursts -->
+  <div id="confetti-layer" class="confetti-layer" aria-hidden="true"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
